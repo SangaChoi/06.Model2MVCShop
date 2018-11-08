@@ -41,6 +41,7 @@ public class ProductDaoImpl implements ProductDAO{
 
 	@Override
 	public List<Product> getProductList(Search search) throws Exception {
+		
 		return sqlSession.selectList("ProductMapper.getProductList",search);
 	}
 

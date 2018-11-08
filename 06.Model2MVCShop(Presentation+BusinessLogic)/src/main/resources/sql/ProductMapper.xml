@@ -48,7 +48,7 @@
 	SELECT *
 	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 		FROM
-			(SELECT DISTINCT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.reg_date, t.tran_status_code as proTranCode
+			(SELECT DISTINCT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.reg_date, NVL(t.tran_status_code,'0') as proTranCode
 			FROM product p, transaction t
 				<if test="searchCondition != null">
 					<where>

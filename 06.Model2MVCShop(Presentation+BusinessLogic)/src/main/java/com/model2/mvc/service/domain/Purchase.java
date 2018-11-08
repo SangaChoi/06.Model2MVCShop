@@ -6,7 +6,7 @@ public class Purchase {
 	
 	private User buyer;
 	private String divyAddr;
-	private String divyDate;
+	private String receiverDate;
 	private String divyRequest;
 	private Date orderDate;
 	private String paymentOption;
@@ -31,11 +31,11 @@ public class Purchase {
 	public void setDivyAddr(String divyAddr) {
 		this.divyAddr = divyAddr;
 	}
-	public String getDivyDate() {
-		return divyDate;
+	public String getReceiverDate() {
+		return receiverDate;
 	}
-	public void setDivyDate(String divyDate) {
-		this.divyDate = divyDate;
+	public void setReceiverDate(String receiverDate) {
+		this.receiverDate = receiverDate;
 	}
 	public String getDivyRequest() {
 		return divyRequest;
@@ -89,7 +89,7 @@ public class Purchase {
 	@Override
 	public String toString() {
 		return "PurchaseVO [buyer=" + buyer + ", divyAddr=" + divyAddr
-				+ ", divyDate=" + divyDate + ", divyRequest=" + divyRequest
+				+ ", receiverDate=" + receiverDate + ", divyRequest=" + divyRequest
 				+ ", orderDate=" + orderDate + ", paymentOption="
 				+ paymentOption + ", purchaseProd=" + purchaseProd
 				+ ", receiverName=" + receiverName + ", receiverPhone="

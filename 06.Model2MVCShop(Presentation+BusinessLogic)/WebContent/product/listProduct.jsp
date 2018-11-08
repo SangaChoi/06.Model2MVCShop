@@ -127,37 +127,6 @@ function fncGetList(currentPage) {
 	<tr>
 		<td colspan="11" bgcolor="808285" height="1"></td>
 	</tr>
-<%--	<% 	
-		for(int i=0; i<list.size(); i++) {
-			Product vo = list.get(i);
-		%>		
-	<tr class="ct_list_pop">
-		<td align="center"><%=i+1%></td>
-		<td></td>
-				
-		<td align="left">
-		<%if(menu.equals("manage")){ %>
-			<a href="/updateProductView.do?prodNo=<%=vo.getProdNo() %>&menu=<%=menu%>"><%=vo.getProdName() %></a>
-		<%}else if(menu.equals("search")){%>
-			<a href="/getProduct.do?prodNo=<%=vo.getProdNo() %>&menu=<%=menu%>"><%=vo.getProdName() %></a>
-		<%} %>	
-		</td>	
-		<td></td>
-		<td align="left"><%=vo.getPrice() %></td>
-		<td></td>
-		<td align="left"><%=vo.getRegDate() %></td>
-		<td></td>
-		<td align="left">
-		
-			πËº€¡ﬂ
-		
-		</td>	
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
-	</tr>	
-	<% } %>
---%>
 
 	<c:set var="i" value="0" />
 	<c:forEach var="product" items="${list}">
