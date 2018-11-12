@@ -48,7 +48,7 @@
  	SELECT *
 	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 			FROM
-				(SELECT *
+				(SELECT PROD_NO, BUYER_ID, RECEIVER_PHONE, TRAN_STATUS_CODE, TRAN_NO
 				FROM transaction
 				WHERE buyer_id=#{buyerId}) inner_table
 			WHERE ROWNUM &lt;= #{search.endRowNum} )

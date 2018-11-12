@@ -46,27 +46,28 @@
 	
 	<select id="getProductList" parameterType="search"	resultMap="productSelectMap">
 	SELECT *
-	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	FROM
+		(SELECT inner_table.* , ROWNUM AS row_seq
 		FROM
-			(SELECT DISTINCT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.reg_date, NVL(t.tran_status_code,'0') as proTranCode
+			(SELECT DISTINCT p.PROD_NO prod_no, p.prod_name prod_name, p.prod_detail prod_detail, p.MANUFACTURE_DAY MANUFACTURE_DAY, p.PRICE PRICE, p.IMAGE_FILE IMAGE_FILE, p.reg_date reg_date, NVL(t.tran_status_code,'0') proTranCode
 			FROM product p, transaction t
 				<if test="searchCondition != null">
 					<where>
-						<if test="searchCondition == 0 and searchKeyword !='' ">
-							p.prod_no = #{searchKeyword} AND p.prod_no=t.prod_no(+)
+						<if test="searchCondition == 0">
+							p.prod_no LIKE '%'||#{searchKeyword}||'%' AND p.prod_no=t.prod_no(+)
 						</if>
-						<if test="searchCondition == 1 and searchKeyword !='' ">
+						<if test="searchCondition == 1">
 							prod_name LIKE '%'||#{searchKeyword}||'%' AND p.prod_no=t.prod_no(+)
 						</if>
-						<if test="searchCondition == 2 and searchKeyword !='' ">
-							price = #{searchKeyword} AND p.prod_no=t.prod_no(+)
+						<if test="searchCondition == 2">
+							price LIKE '%'||#{searchKeyword}||'%' AND p.prod_no=t.prod_no(+)
 						</if>
 					</where>
 				</if>
 				<if test="searchCondition == null">
 				WHERE p.prod_no=t.prod_no(+)
 				</if>
-			ORDER BY prod_no ) inner_table
+				ORDER BY prod_no) inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 	WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

@@ -2,7 +2,9 @@ package com.model2.mvc.web.product;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/addProduct.do")
-	public String addUser( @ModelAttribute("product") Product product) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product) throws Exception {
 
 		System.out.println("/addProduct.do");
 		//Business Logic
@@ -66,6 +68,9 @@ public class ProductController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
+		
+		System.out.println("현재 페이지 : "+search.getCurrentPage());
+		
 		search.setPageSize(pageSize);
 		
 		Map<String , Object> map=productService.getProductList(search);
@@ -92,7 +97,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/updateProduct.do")
-	public String updateProduct(@ModelAttribute("product")Product product, Model model , HttpSession session) throws Exception{
+	public String updateProduct(@ModelAttribute("product")Product product) throws Exception{
 		
 		System.out.println("/updateProduct.do");
 		
@@ -103,18 +108,28 @@ public class ProductController {
 		return "redirect:/getProduct.do?prodNo="+prodNo+"&menu=manage";
 	}
 	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/getProduct.do")
-	public String getProduct(@RequestParam("prodNo") int prodNo, Model model) throws Exception{
+	public String getProduct(@RequestParam("prodNo") String prodNo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		System.out.println("/getProduct.do");
 		
-		Product product=productService.getProduct(prodNo);
+		Cookie[] cookies = request.getCookies();
+		if(cookies!=null && cookies.length>0) {
+		  for(int i=0;i<cookies.length;i++) {	
+			  Cookie cookie = cookies[i];
+			if(cookie.getName().equals("history")) {
+				cookie.setValue(cookie.getValue()+","+prodNo);
+				cookie.setMaxAge(60*60);
+				response.addCookie(cookie);
+			}else{
+			cookie = new Cookie("history",prodNo);
+			cookie.setMaxAge(60*60);
+			response.addCookie(cookie);
+			}
+		  }
+		}
+	
+		Product product=productService.getProduct(Integer.parseInt(prodNo));
 		
 		model.addAttribute("product",product);
 		
