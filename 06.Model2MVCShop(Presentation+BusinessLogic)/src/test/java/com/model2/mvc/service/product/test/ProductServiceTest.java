@@ -32,11 +32,11 @@ public class ProductServiceTest {
 	public void testAddProduct() throws Exception{
 		
 		Product product=new Product();
-		product.setProdName("Ä«¹Ð");
-		product.setProdDetail("ÇÚµåÅ©¸²");
+		product.setProdName("Ä«ï¿½ï¿½");
+		product.setProdDetail("ï¿½Úµï¿½Å©ï¿½ï¿½");
 		product.setManuDate("20011212");
 		product.setPrice(5000);
-		product.setFileName("¼öÁ¤ÆÄÀÏ³×ÀÓ");
+		product.setFileName("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï³ï¿½ï¿½ï¿½");
 		
 		productService.addProduct(product);
 		
@@ -57,11 +57,11 @@ public class ProductServiceTest {
 		Product product=productService.getProduct(10161);
 		Assert.assertNotNull(product);
 		
-		product.setProdName("Ä«¹Ð¼öÁ¤");
-		product.setProdDetail("Ä«¹ÐµðÅ×ÀÏ¼öÁ¤");
+		product.setProdName("Ä«ï¿½Ð¼ï¿½ï¿½ï¿½");
+		product.setProdDetail("Ä«ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 		product.setManuDate("20050505");
 		product.setPrice(6000);
-		product.setFileName("Ä«¹Ð¼öÁ¤ÆÄÀÏ");
+		product.setFileName("Ä«ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		
 		productService.updateProduct(product);
 		
@@ -69,7 +69,7 @@ public class ProductServiceTest {
 		System.out.println(product);
 	}
 	
-	//@Test
+	@Test
 	public void testGetProductListAll() throws Exception{
 		
 		Search search = new Search();
@@ -80,7 +80,7 @@ public class ProductServiceTest {
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 	 	System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -114,7 +114,7 @@ public class ProductServiceTest {
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
 	 	search.setSearchCondition("1");
-	 	search.setSearchKeyword("ÀÚ");
+	 	search.setSearchKeyword("ï¿½ï¿½");
 	 	Map<String,Object> map = productService.getProductList(search);
 		
 	 	List<Object> list = (List<Object>)map.get("list");
@@ -126,7 +126,7 @@ public class ProductServiceTest {
 		
 	}
 	 
-	@Test
+	//@Test
 		 public void testGetProductListByPrice() throws Exception{
 			
 			Search search = new Search();
